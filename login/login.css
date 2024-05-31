@@ -1,0 +1,177 @@
+/*
+* VOICE RECORDING SOLUTION
+* LOGIN PAGE STYLING
+* EXPERTFLOW
+*/
+
+.auth-section {
+    position: absolute;
+    width: 100%;
+    background-color: #2c3044;
+    min-height: 100%;
+    background-image: url(../images/login-bg.png);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .auth-section .row {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute;
+    width: 100%;
+    left: 0;
+  }
+  
+  .main-inner-section {
+    height: 100%;
+  }
+  
+  .main-inner-section.logo-area {
+    background: rgba(29, 154, 192, .9);
+    flex-wrap: wrap;
+  }
+  
+  .main-inner-section.logo-area .brand-logo {
+    position: absolute;
+    bottom: 10%;
+    padding-left: 50px;
+  }
+  
+  .main-inner-section.login-area {
+    background: rgba(70, 70, 70, .9);
+  }
+  
+  .login-inner {
+    max-width: 460px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    transform: translateY(-50%) translatex(-50%);
+    left: 50%;
+  }
+  
+  .input-field {
+    margin-bottom: 10px;
+  }
+  
+  .input-field label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+  
+  .input-field input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #E5E5E5;
+    padding: 0 5px;
+    border-radius: 4px;
+    background: #fff;
+  }
+  
+  .login-heading h3 {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 24px;
+    margin: 5px 0;
+  }
+  
+  .login-heading span {
+    font-size: 13px;
+    color: #fff;
+  }
+  
+  .login-heading {
+    margin-bottom: 30px;
+  }
+  
+  .login-trigger input {
+    background: #1D9AC0;
+    border-color: #1D9AC0;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .login-trigger input:hover {
+    background: lighten(#1D9AC0, 10%);
+  }
+  
+  .login-trigger input:disabled {
+    background: #c1c1c1;
+    color: #555555;
+    border-color: #c1c1c1;
+    cursor: default;
+  }
+  
+  .main-area-right {
+    padding-left: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .main-area-right img {
+    height: 35px;
+    display: block;
+  }
+  
+  .main-area-right h2 {
+    font-size: 36px;
+    color: #fff;
+    line-height: 40px;
+    max-width: 270px;
+    margin: 30px 0 20px;
+  }
+  
+  .main-area-right p {
+    font-size: 15px;
+    color: #fff;
+    max-width: 325px;
+  }
+  
+  .cc_checkbox {
+    margin: 0 12px;
+    color: #fff;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .spinner {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 22% auto;
+    stroke: #1A50A3 !important;
+  }
+
+
+
+  .loading-area {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(247, 247, 247, 0.52);
+    z-index: 999;
+    top: 0;
+    left: 0;
+  }
+  

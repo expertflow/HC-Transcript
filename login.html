@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Login</title>
+    <link rel="stylesheet" href="/login/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="config.js"></script>
+</head>
+
+<body>
+    <div class="loading-area" id="spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="container-fluid auth-section">
+        <div class="row">
+            <div class="main-inner-section login-area col-sm-12 col-md-6 valign-wrapper">
+                <form id="loginForm" class="form-horizontal form-bordered login-form">
+                    <div class="login-inner">
+                        <div class="login-heading">
+                            <h3>Login</h3>
+                            <span>Please provide a valid username and password to login to your account.</span>
+                        </div>
+                        <div class="input-field">
+                            <label for="username" class="label"><span>Username</span></label>
+                            <input id="username" autocomplete="off" required>
+                            <div class="form-error" id="usernameError"></div>
+                        </div>
+                        <div class="input-field">
+                            <label for="password" class="label">Password</label>
+                            <input id="password" type="password" autocomplete="off" required>
+                            <div class="form-error" id="passwordError"></div>
+                        </div>
+                        <div class="input-field">
+                            <br>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="input-field login-trigger">
+                            <input id="loginButton" type="submit" class="button flip-in-ver-right" value="Login">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="main-inner-section logo-area col-sm-12 col-md-6">
+                <div class="main-area-right">
+                    <img src="../images/ef-logo.svg" alt="Wallboard">
+                    <div class="heading-area">
+                        <h2>HC Transcript</h2>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="brand-logo">
+                    <img src="../images/ef-logo.svg" alt="ExpertFlow">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login/login.js"></script>
+</body>
+
+</html>
