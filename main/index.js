@@ -5,7 +5,7 @@ var messages = [];
 var options = [10, 15, 20, 25]; // page size option
 var totalPages;
 var currentPage = 1;
-var pageSize = [0];
+var pageSize = options[0];
 var searchQuery;
 
 document.getElementById("searchButton").addEventListener("click", () => {
@@ -22,6 +22,7 @@ document.getElementById("searchButton").addEventListener("click", () => {
 });
 
 function fetchMessages(page, pageSize, searchQuery) {
+  console.log("----------------->", page, pageSize, searchQuery);
   showSpinner();
   const request = new XMLHttpRequest();
   let url = `${api_url}/getMessagesByRefId?refId=${searchQuery}&page=${page}&pageSize=${pageSize}`;
@@ -32,8 +33,9 @@ function fetchMessages(page, pageSize, searchQuery) {
       result = JSON.parse(request.response);
       messages = result.messages;
       if (messages) {
+        console.log("messages are ", messages);
         console.log("Total Message: ", result.metaData.totalMessages);
-
+        hideSpinner();
         totalPages = calculateTotalPages(
           result.metaData.totalMessages,
           pageSize
@@ -42,7 +44,6 @@ function fetchMessages(page, pageSize, searchQuery) {
           showPagination();
         }
         messageFunction();
-        hideSpinner();
       } else {
         document.getElementById("chatDate").innerHTML = "No Record Found";
         hideSpinner();
@@ -146,12 +147,11 @@ function logout() {
     return false;
   }
 }
-// function will calculate total pages 
+// function will calculate total pages
 function calculateTotalPages(totalEntries, pageSize) {
   let totalpages = Math.ceil(totalEntries / pageSize);
   return totalpages;
 }
-
 
 //  this will show pagination ui
 
