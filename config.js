@@ -1,2 +1,2 @@
-var keycloak_url = "https://cx-frontend.expertflow.com";
-var history_api_url = "https://192.168.1.175/legacy/api/";
+var keycloak_url = "https://cim-dev.expertflow.com";
+var history_api_url = "https://hc.expertflow.com/legacy/api/";

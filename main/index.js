@@ -17,7 +17,10 @@ function fetchMessages(page, pageSize, searchQuery) {
   request.send();
   request.onload = () => {
     if (request.status === 200) {
-      messages = JSON.parse(request.response);
+      
+      result = JSON.parse(request.response);
+      messages = result.messages;
+      console.log('Total Message: ', result.metaData.totalMessages);
       console.log("Messages :", messages);
       if (messages.length === 0) {
         document.getElementById("chatDate").innerHTML = 'No Record Found';
