@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HC Transcript</title>
-    <link rel="icon" type="image/png" href="../images/favicon.ico">
-    <base href=".">
-    <link rel="stylesheet" href="/main/index.css">
-    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="../images/favicon.ico" />
+    <base href="." />
+    <link rel="stylesheet" href="/main/index.css" />
+    <link rel="stylesheet" href="/styles/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script src="config.js"></script>
-</head>
+  </head>
 
-<body data-new-gr-c-s-check-loaded="14.1063.0" data-gr-ext-installed="" cz-shortcut-listen="true" id="transcriptPrint">
+  <body
+    data-new-gr-c-s-check-loaded="14.1063.0"
+    data-gr-ext-installed=""
+    cz-shortcut-listen="true"
+    id="transcriptPrint"
+  >
+  <div class="loading-area" id="spinner" style="display: none;">
+    <div class="spinner"></div>
+</div>
     <div id="pageHeader" class="transcript-header">
-        <img src="./images/expertflow-logo.png" alt="ExpertFlow Logo">
-        <h3>HC Transcript</h3>
-        <img class="logout-icon" src="./images/logout.jpg" alt="logout icon" onclick="logout()">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Enter Reference Id to get Chat History..."
-                class="form-control form-control-sm">
-            <button id="searchButton" class="btn btn-sm btn-primary search-btn">Search</button>
-        </div>
+      <img src="./images/expertflow-logo.png" alt="ExpertFlow Logo" />
+      <h3>HC Transcript</h3>
+      <img
+        class="logout-icon"
+        src="./images/logout.jpg"
+        alt="logout icon"
+        onclick="logout()"
+      />
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Enter Reference Id to get Chat History..."
+          class="form-control form-control-sm"
+        />
+        <button id="searchButton" class="btn btn-sm btn-primary search-btn">
+          Search
+        </button>
+      </div>
     </div>
 
     <div class="chat-area">
-        <div class="line-info"> <span id="chatDate"></span></div>
-        <div id="msg"></div>
+      <div class="line-info"><span id="chatDate"></span></div>
+      <div id="msg"></div>
+    </div>
+
+    <div class="paginationArea">
+ 
+      </div>
     </div>
     <div id="pageFooter-last" class="chat-footer">
-        <p> Copyright &copy2024 Expertflow - All Rights Reserved </p>
+      <p>Copyright &copy2024 Expertflow - All Rights Reserved</p>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (!sessionStorage.getItem("username") || !sessionStorage.getItem("tenant") || !sessionStorage.getItem("token")) {
-                window.location.href = '/login.html';
-            }
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        if (
+          !sessionStorage.getItem("username") ||
+          !sessionStorage.getItem("tenant") ||
+          !sessionStorage.getItem("token")
+        ) {
+          window.location.href = "/login.html";
+        }
+      });
     </script>
-
-</body>
-<script src="main/index.js"></script>
-
+  </body>
+  <script src="main/index.js"></script>
 </html>
