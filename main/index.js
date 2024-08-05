@@ -2,22 +2,28 @@ const api_url = history_api_url;
 var messages = [];
 // pagination varibles
 
-var options = [10, 15, 20, 25]; // page size option
+var options = [10, 15, 20, 25, 50, 100]; // page size option
 var totalPages;
 var currentPage = 1;
 var pageSize = options[0];
 var searchQuery;
+const searchInput = document.getElementById("searchInput");
+const submitButton = document.getElementById("searchButton");
 
+searchInput.addEventListener("input", () => {
+  submitButton.classList.toggle("disabled", !searchInput.value);
+});
 document.getElementById("searchButton").addEventListener("click", () => {
   const searchquery = document.getElementById("searchInput").value;
   if (searchquery) {
     searchQuery = searchquery;
-    const page = 1; // reset to the first page for search results
-    const pageSize = 10;
+    currentPage = 1; // reset to the first page for search results
+    pageSize = 10;
+
     // reset ui before fetching
     document.getElementById("msg").innerHTML = "";
     document.querySelector(".paginationArea").innerHTML = "";
-    fetchMessages(page, pageSize, searchQuery);
+    fetchMessages(currentPage, pageSize, searchQuery);
   }
 });
 
@@ -35,6 +41,7 @@ function fetchMessages(page, pageSize, searchQuery) {
       if (messages) {
         console.log("messages are ", messages);
         console.log("Total Message: ", result.metaData.totalMessages);
+        options = getPaginationOptions(+result.metaData.totalMessages);
         hideSpinner();
         totalPages = calculateTotalPages(
           result.metaData.totalMessages,
@@ -80,8 +87,13 @@ function messageFunction() {
               </div>
             </div>
             <div class="chat-message-content">
+            ${
+              message.attachments.length > 0
+                ? previewAttachment(message.attachments)
+                : ""
+            }
               <p><span class="chat-name">${message.from.firstName}</span>
-              <span>${message.text}</span>
+              <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
           </div>`;
@@ -89,14 +101,20 @@ function messageFunction() {
     if (message.from.type == "Agent") {
       chatDiv += `
           <div class="chat-message agent-message">
+          
             <div class="profile-pic">
               <div class="profile-pic-area user-img">
                 <img src="./images/agent.png" alt="agent"/>
               </div>
             </div>
             <div class="chat-message-content">
+            ${
+              message.attachments.length > 0
+                ? previewAttachment(message.attachments)
+                : ""
+            }
               <p><span class="chat-name">${message.from.firstName}</span>
-              <span>${message.text}</span>
+              <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
           </div>`;
@@ -110,8 +128,13 @@ function messageFunction() {
               </div>
             </div>
             <div class="chat-message-content">
+            ${
+              message.attachments.length > 0
+                ? previewAttachment(message.attachments)
+                : ""
+            }
               <p><span class="chat-name">${message.from.firstName}</span>
-              <span>${message.text}</span>
+              <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
           </div>`;
@@ -229,4 +252,62 @@ function showSpinner() {
 function hideSpinner() {
   const spinner = document.getElementById("spinner");
   spinner.style.display = "none";
+}
+
+function previewAttachment(files) {
+  // console.log();
+
+  let result = "";
+  files.forEach((file) => {
+    result += previewHtml(file);
+  });
+  return result;
+}
+
+function previewHtml(file) {
+  let type = file.type.split("/")[0];
+  let chatDiv = "";
+
+  if (type.toUpperCase() == "IMAGE") {
+    chatDiv += `
+          <div class="image-preview">
+            <div class="image-preview-content">
+              <p><a target="_blank" href="${file._thumbnailUrl}"><img src="${file._thumbnailUrl}" class="preview-image"></a>
+              <span>${file.name}</span>
+            </div>
+          </div>`;
+  } else {
+    chatDiv += `<div class="file-preview-area">
+      <a href="${file._thumbnailUrl}" class="file-preview" target="_blank">
+          <img class="file-icon" src="https://efcx-frontend.expertflow.com/customer-widget/widget-assets/chat-transcript/images/file-type.svg" alt="File Icon">
+          <div class="file-extension">${type.toUpperCase()}</div>
+      </a>
+      <span class="file-name">${file.name}</span>
+    </div>`;
+  }
+  return chatDiv;
+}
+function getPaginationOptions(totalMessages) {
+  const baseOptions = [5, 10, 20, 50];
+  const options = [];
+
+  for (let i = 0; i < baseOptions.length; i++) {
+    if (totalMessages >= baseOptions[i]) {
+      options.push(baseOptions[i]);
+    }
+  }
+
+  // Add multiples of 50 up to totalMessages
+  let multiple = 50;
+  while (multiple < totalMessages) {
+    options.push(multiple);
+    multiple += 50;
+  }
+
+  // Ensure the totalMessages value is included
+  if (!options.includes(totalMessages)) {
+    options.push(totalMessages);
+  }
+
+  return options;
 }
