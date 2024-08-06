@@ -2,18 +2,27 @@ const api_url = history_api_url;
 var messages = [];
 // pagination varibles
 
-var options = [10, 15, 20, 25, 50, 100]; // page size option
+var options = [10, 20, 25, 50]; // page size option
 var totalPages;
 var currentPage = 1;
 var pageSize = options[0];
 var searchQuery;
+var totalMessages;
 const searchInput = document.getElementById("searchInput");
 const submitButton = document.getElementById("searchButton");
-
+searchInput.addEventListener("keypress", function (event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    event.preventDefault();
+    sendRequest();
+  }
+});
 searchInput.addEventListener("input", () => {
   submitButton.classList.toggle("disabled", !searchInput.value);
 });
-document.getElementById("searchButton").addEventListener("click", () => {
+document.getElementById("searchButton").addEventListener("click", sendRequest);
+
+function sendRequest() {
   const searchquery = document.getElementById("searchInput").value;
   if (searchquery) {
     searchQuery = searchquery;
@@ -25,8 +34,7 @@ document.getElementById("searchButton").addEventListener("click", () => {
     document.querySelector(".paginationArea").innerHTML = "";
     fetchMessages(currentPage, pageSize, searchQuery);
   }
-});
-
+}
 function fetchMessages(page, pageSize, searchQuery) {
   console.log("----------------->", page, pageSize, searchQuery);
   showSpinner();
@@ -41,7 +49,8 @@ function fetchMessages(page, pageSize, searchQuery) {
       if (messages) {
         console.log("messages are ", messages);
         console.log("Total Message: ", result.metaData.totalMessages);
-        options = getPaginationOptions(+result.metaData.totalMessages);
+        totalMessages = +result.metaData.totalMessages;
+        options = getPaginationOptions(totalMessages);
         hideSpinner();
         totalPages = calculateTotalPages(
           result.metaData.totalMessages,
@@ -209,9 +218,13 @@ function getOptions() {
   let html = ``;
   for (item of options) {
     if (item == pageSize) {
-      html += `<option selected value="${item}" id=option-${item} >${item}</option>`;
+      html += `<option selected value="${item}" id=option-${item} >${
+        item === totalMessages ? "All" : item
+      }</option>`;
     } else {
-      html += `<option value="${item}" id=option-${item} >${item}</option>`;
+      html += `<option value="${item}" id=option-${item} >${
+        item === totalMessages ? "All" : item
+      }</option>`;
     }
   }
 
@@ -291,7 +304,7 @@ function previewHtml(file) {
   return chatDiv;
 }
 function getPaginationOptions(totalMessages) {
-  const baseOptions = [5, 10, 20, 50];
+  const baseOptions = [10, 20, 50];
   const options = [];
 
   for (let i = 0; i < baseOptions.length; i++) {
@@ -303,7 +316,10 @@ function getPaginationOptions(totalMessages) {
   // Add multiples of 50 up to totalMessages
   let multiple = 50;
   while (multiple < totalMessages) {
-    options.push(multiple);
+    if (!options.includes(multiple)) {
+      options.push(multiple);
+    }
+
     multiple += 50;
   }
 
