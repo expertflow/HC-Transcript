@@ -87,12 +87,13 @@ function messageFunction() {
               </div>
             </div>
             <div class="chat-message-content">
-            ${
-              message.attachments.length > 0
-                ? previewAttachment(message.attachments)
-                : ""
-            }
+          
               <p><span class="chat-name">${message.from.firstName}</span>
+                ${
+                  message.attachments.length > 0
+                    ? previewAttachment(message.attachments)
+                    : ""
+                }
               <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
@@ -108,12 +109,13 @@ function messageFunction() {
               </div>
             </div>
             <div class="chat-message-content">
-            ${
-              message.attachments.length > 0
-                ? previewAttachment(message.attachments)
-                : ""
-            }
+        
               <p><span class="chat-name">${message.from.firstName}</span>
+                  ${
+                    message.attachments.length > 0
+                      ? previewAttachment(message.attachments)
+                      : ""
+                  }
               <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
@@ -128,12 +130,13 @@ function messageFunction() {
               </div>
             </div>
             <div class="chat-message-content">
-            ${
-              message.attachments.length > 0
-                ? previewAttachment(message.attachments)
-                : ""
-            }
+   
               <p><span class="chat-name">${message.from.firstName}</span>
+                       ${
+                         message.attachments.length > 0
+                           ? previewAttachment(message.attachments)
+                           : ""
+                       }
               <span>${decodeURIComponent(message.text)}</span>
                 <span class="message-stamp"><span class="chat-time">${time}</span></span></p>
             </div>
